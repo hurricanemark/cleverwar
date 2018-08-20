@@ -3,7 +3,7 @@ node{
      git 'https://github.com/hurricanemark/cleverwar'
    }
    stage('Retrieve War File'){
-      curl -OL http://aesclever.com/aftp/.linux3.0/TcpipLinux.war
+      wget http://aesclever.com/aftp/.linux3.0/TcpipLinux.war
    }
 
    stage('Deploy to Tomcat'){
