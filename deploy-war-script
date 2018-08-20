@@ -2,9 +2,13 @@ node{
    stage('SCM Checkout'){
      git 'https://github.com/hurricanemark/cleverwar'
    }
+   stage('Retrieve War File'){
+      curl -OL http://aesclever.com/aftp/.linux3.0/TcpipLinux.war
+   }
+
    stage('Deploy to Tomcat'){
       sshagent (credentials: ['tomcat-server-AzureSLES']) {
-         sh 'scp -o StrictHostKeyChecking=no http://aesclever.com/aftp/.linux3.0/TcpipLinux.war aes@13.91.130.158:/usr/share/tomcat/webapps/'
+         sh 'scp -o StrictHostKeyChecking=no target/TcpipLinux.war aes@13.91.130.158:/usr/share/tomcat/webapps/'
       }
    }
    stage('Email Notification'){
