@@ -3,7 +3,7 @@ node{
      git 'https://github.com/hurricanemark/cleverwar'
    }
    stage('Deploy to Tomcat'){
-      sshagent (credentials: ['VerifyAzureSLES12']) {
+      sshagent (credentials: ['tomcat-server-AzureSLES']) {
          sh 'scp -o StrictHostKeyChecking=no http://aesclever.com/aftp/.linux3.0/TcpipLinux.war aes@13.91.130.158:/usr/share/tomcat/webapps/'
       }
    }
