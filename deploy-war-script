@@ -8,8 +8,7 @@ node{
       sh "${mvnHome}/bin/mvn package"
    }
    stage('Deploy to Tomcat'){
-      
-      sshagent(['tomcat-dev']) {
+      sshagent (credentials: ['VerifyAzureSLES12']) {
          sh 'scp -o StrictHostKeyChecking=no http://aesclever.com/aftp/.linux3.0/TcpipLinux.war aes@13.91.130.158:/usr/share/tomcat/webapps/'
       }
    }
