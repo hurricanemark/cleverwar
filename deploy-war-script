@@ -1,0 +1,22 @@
+node{
+   stage('SCM Checkout'){
+     git 'https://github.com/hurricanemark/cleverwar'
+   }
+   stage('Compile-Package'){
+      // Get maven home path
+      def mvnHome =  tool name: 'M3', type: 'maven'   
+      sh "${mvnHome}/bin/mvn package"
+   }
+   stage('Deploy to Tomcat'){
+      
+      sshagent(['tomcat-dev']) {
+         sh 'scp -o StrictHostKeyChecking=no http://aesclever.com/aftp/.linux3.0/TcpipLinux.war aes@13.91.130.158:/usr/share/tomcat/webapps/'
+      }
+   }
+   stage('Email Notification'){
+      mail bcc: '', body: '''Hi Welcome to jenkins email alerts
+      Thanks
+      Mark''', cc: '', from: '', replyTo: '', subject: 'Jenkins has deployed TcpipLinux on 13.91.130.158', to: 'hurricanemark@gmail.com'
+   }
+
+}
