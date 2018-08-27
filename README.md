@@ -8,4 +8,4 @@ Java achival file (WAR) used in deploying to apache-tomcat web severs.
     e.g. scp -O ${JENKINS_HOME}/${PROJECT_NAME}/*.war [target/http://host_ip/fullpath_to_webapps/]
     
     Example:
-        sh 'scp -o StrictHostKeyChecking=no target/TcpipLinux.war admin@192.168.100.12:/usr/share/tomcat/webapps/'
+        sh 'scp -o StrictHostKeyChecking=no target/*.war admin@192.168.100.12:/usr/share/tomcat/webapps/'
